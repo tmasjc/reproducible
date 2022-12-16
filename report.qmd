@@ -7,7 +7,6 @@ format:
         toc: false
         number-sections: false
         CJKmainfont: STKaiti
-        df-print: kable
 editor_options: 
   chunk_output_type: console
 ---
@@ -22,26 +21,44 @@ source("database.R")
 
 Currently we have a data frame with `r nrow(dat)` rows.
 
-****
+We can do some R function. 
 
-Do some R function.
-
-```{r}
+```{r rsection}
 library(dplyr)
-dat |> summarise(min_carat = min(carat), max_carat = max(carat))
+dat |> 
+    summarise(
+        min_carat = min(carat), 
+        max_carat = max(carat)
+        ) |> 
+    knitr::kable()
 ```
 
-We can also use Python function.
+We can also do some Python function.
 
 ```{r, include=FALSE}
 library(reticulate)
 use_condaenv("base")
 ```
 
-```{python}
+```{python pysection}
 import pandas 
 from IPython.display import Markdown
 from tabulate import tabulate
 res = r.dat.agg(min_carat=('carat', min), max_carat=('carat', max))
 Markdown(tabulate(res))
 ```
+
+\newpage Needless to say, we can do some *beautiful* plot. 
+
+```{r rplot}
+library(ggplot2)
+dat |> 
+    ggplot(aes(carat, price, col = color)) +
+    geom_point(alpha = 0.7) + 
+    scale_y_continuous(labels = scales::dollar) + 
+    scale_color_brewer(palette = "Dark2") + 
+    theme_light() + 
+    theme(legend.position = "top") +
+    labs(x = "Carat", y = "Price", col = "Color")
+```
+
