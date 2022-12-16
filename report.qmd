@@ -1,0 +1,47 @@
+---
+title: "Quarto"
+execute: 
+    echo: true
+format:
+    pdf: 
+        toc: false
+        number-sections: false
+        CJKmainfont: STKaiti
+        df-print: kable
+editor_options: 
+  chunk_output_type: console
+---
+
+A demo of `Quarto`.
+
+```{r}
+#| message: false
+#| warning: false
+source("database.R")
+```
+
+Currently we have a data frame with `r nrow(dat)` rows.
+
+****
+
+Do some R function.
+
+```{r}
+library(dplyr)
+dat |> summarise(min_carat = min(carat), max_carat = max(carat))
+```
+
+We can also use Python function.
+
+```{r, include=FALSE}
+library(reticulate)
+use_condaenv("base")
+```
+
+```{python}
+import pandas 
+from IPython.display import Markdown
+from tabulate import tabulate
+res = r.dat.agg(min_carat=('carat', min), max_carat=('carat', max))
+Markdown(tabulate(res))
+```
