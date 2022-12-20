@@ -4,15 +4,15 @@ This report demostrates how to generate a PDF report using `Quarto`. It utilizes
 
 ```json
 default: 
-	DB_HOST:
-	DB_USER:
-	DB_PSWD:
-	DB_NAME:			
+  DB_HOST: # host url
+  DB_USER: # username
+  DB_PSWD: # password
+  DB_NAME: # database
 ```
 
-Packages required to run source code.  
+The following packages are required to run source code.  
 
-R Package
+R Packages
 
 ```
 dplyr  
@@ -20,7 +20,7 @@ reticulate
 ggplot2 
 ```
 
-Python Package
+Python Packages
 
 ```
 IPython
